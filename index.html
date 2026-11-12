@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080d20">
+<title>3D QUEST — Секрет втраченого виміру</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="scene" aria-hidden="true"></div>
+<div class="vignette"></div>
+<header class="topbar">
+  <a class="brand" href="#" aria-label="3D Quest — на початок"><span class="brand-mark">◆</span><span>3D<span class="accent">QUEST</span></span></a>
+  <div class="top-meta"><span class="live-dot"></span> НАВЧАЛЬНА МІСІЯ · 9 КЛАС</div>
+  <button class="ghost-btn" id="soundToggle" title="Увімкнути або вимкнути звук">♫ Звук: вимкнено</button>
+</header>
+
+<main class="shell">
+  <section class="hero" id="welcome">
+    <div class="eyebrow"><span>РОЗДІЛ 4</span><i></i><span>ТРИВИМІРНА ГРАФІКА</span></div>
+    <h1>СЕКРЕТ<br>ВТРАЧЕНОГО <span class="gradient-text">ВИМІРУ</span></h1>
+    <p class="lead">П'ять випробувань. П'ять кристалів знань. Одна місія — відновити 3D-світ, застосувавши свої знання про тривимірну графіку.</p>
+    <div class="hero-facts">
+      <div><b>05</b><small>РІВНІВ</small></div><div><b>20</b><small>ЗАВДАНЬ</small></div><div><b>100</b><small>МАКС. БАЛІВ</small></div><div><b>12</b><small>БАЛІВ ОЦІНКИ</small></div>
+    </div>
+    <div class="start-panel">
+      <label for="studentName">ІМ'Я ТА ПРІЗВИЩЕ УЧНЯ</label>
+      <div class="start-row"><input id="studentName" maxlength="70" placeholder="Наприклад, Олена Коваленко"><button class="primary-btn" id="startBtn">РОЗПОЧАТИ МІСІЮ <span>→</span></button></div>
+      <p class="tiny-note">Результат зберігається у цьому браузері. Для нового проходження можна скинути прогрес.</p>
+    </div>
+  </section>
+
+  <section class="game hidden" id="game">
+    <aside class="sidebar">
+      <div class="player-card"><div class="avatar">◈</div><div><small>АГЕНТ 3D</small><strong id="playerLabel">Учень</strong></div></div>
+      <div class="score-card"><small>ТВОЇ БАЛИ</small><div><strong id="score">0</strong><span>/ 100</span></div><div class="progress-track"><i id="scoreBar"></i></div></div>
+      <div class="level-nav" id="levelNav"></div>
+      <button class="reset-btn" id="resetBtn">↻ Скинути проходження</button>
+    </aside>
+
+    <section class="mission">
+      <div class="mission-head">
+        <div><div class="eyebrow" id="levelEyebrow">РІВЕНЬ 01 · ЛЕГКИЙ</div><h2 id="levelTitle">Портал вимірів</h2><p id="levelDesc">Відкрий перший кристал знань.</p></div>
+        <div class="crystal" id="crystal">◇</div>
+      </div>
+      <div class="question-card" id="questionCard">
+        <div class="question-top"><span id="questionCount">ЗАВДАННЯ 1 / 2</span><span class="points" id="questionPoints">5 БАЛІВ</span></div>
+        <h3 id="questionText">Запитання</h3>
+        <div class="answers" id="answers"></div>
+        <div class="feedback hidden" id="feedback" aria-live="polite"></div>
+        <div class="question-actions"><span id="hintText">Обери одну правильну відповідь.</span><button class="primary-btn hidden" id="nextBtn">ДАЛІ →</button></div>
+      </div>
+      <div class="level-complete hidden" id="levelComplete">
+        <div class="complete-icon">✦</div><div class="eyebrow">КРИСТАЛ ВІДНОВЛЕНО</div><h3 id="completeTitle">Рівень пройдено!</h3><p id="completeText"></p><button class="primary-btn" id="continueBtn">ПРОДОВЖИТИ →</button>
+      </div>
+      <div class="mission-footer"><span>ПІДКАЗКА: уважно читай запитання</span><span>§ 4.1 · ТРИВИМІРНА ГРАФІКА</span></div>
+    </section>
+  </section>
+
+  <section class="result hidden" id="result">
+    <div class="result-orb">🏆</div><div class="eyebrow">МІСІЮ ВИКОНАНО</div><h2>Ти відновив<br><span class="gradient-text">3D-СВІТ!</span></h2>
+    <p class="lead" id="resultName">Вітаємо!</p>
+    <div class="result-grid">
+      <div class="result-tile"><small>НАБРАНО БАЛІВ</small><strong id="finalPoints">0/100</strong></div>
+      <div class="result-tile highlight"><small>ОЦІНКА ЗА ШКАЛОЮ 12</small><strong id="finalGrade">—/12</strong></div>
+      <div class="result-tile"><small>ПРОЙДЕНО РІВНІВ</small><strong>5/5</strong></div>
+      <div class="result-tile"><small>НАГОРОДА</small><strong class="award" id="award">Дослідник</strong></div>
+    </div>
+    <p class="result-comment" id="resultComment"></p>
+    <div class="result-actions"><button class="primary-btn" id="printBtn">ЗБЕРЕГТИ СЕРТИФІКАТ / PDF</button><button class="secondary-btn" id="csvBtn">ЗАВАНТАЖИТИ РЕЗУЛЬТАТ CSV</button><button class="ghost-btn" id="againBtn">ПОВТОРИТИ КВЕСТ</button></div>
+    <p class="tiny-note">Оцінка є результатом ігрової шкали. Учитель може адаптувати відповідність балів критеріям оцінювання класу.</p>
+  </section>
+  <footer>СТВОРЕНО ДЛЯ НАВЧАННЯ · 3D QUEST <span>Three.js · HTML · CSS · JavaScript</span></footer>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
